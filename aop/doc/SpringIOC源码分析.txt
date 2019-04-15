@@ -1,0 +1,65 @@
+package test;
+import org.springframework.beans.tests.Person;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+public class Test {
+ public static void main(String[] args) throws ClassNotFoundException {
+
+   ApplicationContext ctx = new FileSystemXmlApplicationContext
+       ("spring-beans/src/test/resources/beans.xml");
+   System.out.println("number : " + ctx.getBeanDefinitionCount());
+   ((Person) ctx.getBean("person")).work();
+ }
+}
+
+首先调用FileSystemXmlApplicationContext来初始化IOC容器（ApplicationContext）。FileSystemXmlApplicationContext这个类是专明用于以XML文件来初始化容器的类。
+我们看一看构造函数。
+public FileSystemXmlApplicationContext(String configLocation) throws BeansException {
+		this(new String[] {configLocation}, true, null);
+	}
+	
+构造函数需要传入一个参数，即XML配置文件的位置，而这个构造函数最终调用的是下面这个构造函数。
+public FileSystemXmlApplicationContext(
+			String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)
+			throws BeansException {
+
+		super(parent);
+		setConfigLocations(configLocations);
+		if (refresh) {
+			refresh();
+		}
+	}
+由于parent 为null，所以我们暂时不管这个参数。
+那么configLocations这个参数又设置到哪里去了呢？
+通过查看源码我们知道setConfigLocations这个方法其实是属于FileSystemXmlApplicationContext的父类AbstractRefreshableConfigApplicationContext的，并且AbstractRefreshableConfigApplicationContext
+拥有了configLocations位置属性。
+
+public void setConfigLocations(@Nullable String... locations) {
+		if (locations != null) {
+			Assert.noNullElements(locations, "Config locations must not be null");
+			this.configLocations = new String[locations.length];
+			for (int i = 0; i < locations.length; i++) {
+				this.configLocations[i] = resolvePath(locations[i]).trim();
+			}
+		}
+		else {
+			this.configLocations = null;
+		}
+	}
+	
+上面在设置每个configLocation的时候有调用了resolvePath方法。那么这个方法又是怎么回事呢？
+
+resolvePath方法属于AbstractRefreshableConfigApplicationContext类。
+
+protected String resolvePath(String path) {
+		return getEnvironment().resolveRequiredPlaceholders(path);
+	}
+
+这个方法的作用其实就是用环境值替换占位符，当有必要的时候。
+在resolvePath方法中调用了getEnvironment方法来获取环境变量，而getEnvironment这个方法是属于AbstractApplicationContextAbstractApplicationContext的。
+
+
+
+
+	
+	
