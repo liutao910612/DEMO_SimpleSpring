@@ -2,7 +2,8 @@ package com.liutao.ioc.reader;
 
 
 import com.liutao.ioc.BeanDefinition;
-import com.liutao.ioc.ResourceLoader;
+import com.liutao.ioc.loader.ResourceLoader;
+import com.liutao.ioc.support.BeanDefinitionRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,16 +22,16 @@ public class AbstractBeanDefinitionReader implements BeanDefinitionReader {
     /**
      * 资源加载器
      */
-    private ResourceLoader resourceLoader;
+    private BeanDefinitionRegistry beanDefinitionRegistry;
 
     /**
      * 构造器器必须有一个资源加载器， 默认插件创建一个map容器
      *
-     * @param resourceLoader 资源加载器
+     * @param beanDefinitionRegistry 资源加载器
      */
-    protected AbstractBeanDefinitionReader(ResourceLoader resourceLoader) {
+    protected AbstractBeanDefinitionReader(BeanDefinitionRegistry beanDefinitionRegistry) {
         this.registry = new HashMap<>();
-        this.resourceLoader = resourceLoader;
+        this.beanDefinitionRegistry = beanDefinitionRegistry;
     }
 
     /**
@@ -38,12 +39,5 @@ public class AbstractBeanDefinitionReader implements BeanDefinitionReader {
      */
     public Map<String, BeanDefinition> getRegistry() {
         return registry;
-    }
-
-    /**
-     * 获取资源加载器
-     */
-    public ResourceLoader getResourceLoader() {
-        return resourceLoader;
     }
 }

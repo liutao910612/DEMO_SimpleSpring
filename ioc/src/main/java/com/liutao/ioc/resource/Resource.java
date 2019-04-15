@@ -1,4 +1,4 @@
-package com.liutao.ioc;
+package com.liutao.ioc.resource;
 
 import java.io.InputStream;
 

@@ -1,5 +1,7 @@
 package com.liutao.ioc;
 
+import com.liutao.ioc.resource.Resource;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
