@@ -1,5 +1,8 @@
-package com.liutao.ioc;
+package com.liutao.ioc.reader;
 
+import com.liutao.ioc.BeanDefinition;
+import com.liutao.ioc.PropertyValue;
+import com.liutao.ioc.ResourceLoader;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;

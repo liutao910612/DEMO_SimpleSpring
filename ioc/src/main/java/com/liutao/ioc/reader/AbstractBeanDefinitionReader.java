@@ -1,5 +1,8 @@
-package com.liutao.ioc;
+package com.liutao.ioc.reader;
 
+
+import com.liutao.ioc.BeanDefinition;
+import com.liutao.ioc.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;
