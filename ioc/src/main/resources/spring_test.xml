@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <beans>
+        <bean id="person" class="com.liutao.vo.Person"/>
+    </beans>
+</beans>
