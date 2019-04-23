@@ -5,6 +5,7 @@ import com.liutao.ioc.loader.DocumentLoader;
 import com.liutao.ioc.resource.Resource;
 import com.liutao.ioc.support.BeanDefinitionRegistry;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import java.io.InputStream;
@@ -43,9 +44,15 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         return count;
     }
 
-
+    /**
+     * Register the bean definitions contained in the given DOM document
+     * @param document
+     * @param resource
+     * @return
+     */
     public int registerBeanDefinitions(Document document, Resource resource) {
 
+        Element root = document.getDocumentElement();
         return 0;
     }
 
